@@ -251,7 +251,7 @@ def _kl_divergence_bh(params, P, degrees_of_freedom, n_samples, n_components,
 
     return error, grad
 
-
+positions=[]
 def _gradient_descent(objective, p0, it, n_iter,
                       n_iter_check=1, n_iter_without_progress=300,
                       momentum=0.8, learning_rate=200.0, min_gain=0.01,
@@ -336,6 +336,7 @@ def _gradient_descent(objective, p0, it, n_iter,
 
     tic = time()
     for i in range(it, n_iter):
+        positions.append(p.copy())
         error, grad = objective(p, *args, **kwargs)
         grad_norm = linalg.norm(grad)
 
